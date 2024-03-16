@@ -1,0 +1,26 @@
+
+<script src="http://p.jwpcdn.com/6/8/jwplayer.js"></script>
+<div id='mediaplayer'></div>
+<script type="text/javascript">
+  jwplayer('mediaplayer').setup({
+     width: 640,
+     height: 360,
+     controlbar: "bottom",
+     playlist: [{
+        file: "https://www.youtube.com/watch?v=zmnbgKw2HbE",
+        image: "http://uni.edu/jw7/assets/movie.jpg",
+        tracks: [{ 
+            file: "http://uni.edu/jw7/captions/movie-en.2014.vtt", 
+            label: "English",
+            kind: "captions",
+            "default": true 
+            },{ 
+            file: "http://uni.edu/jw7/captions/movie-fr.2014.vtt", 
+            kind: "captions",
+            label: "French"
+        }]
+    }]
+
+});
+</script>
+
