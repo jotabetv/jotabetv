@@ -1,28 +1,98 @@
+<!doctype html>
 <html>
-  <body>
-<script src="http://p.jwpcdn.com/6/8/jwplayer.js"></script>
-<div id='mediaplayer'></div>
-<script type="text/javascript">
-  jwplayer('mediaplayer').setup({
-     width: 640,
-     height: 360,
-     controlbar: "bottom",
-     playlist: [{
-        file: "https://www.youtube.com/watch?v=zmnbgKw2HbE",
-        image: "http://uni.edu/jw7/assets/movie.jpg",
-        tracks: [{ 
-            file: "http://uni.edu/jw7/captions/movie-en.2014.vtt", 
-            label: "English",
-            kind: "captions",
-            "default": true 
-            },{ 
-            file: "http://uni.edu/jw7/captions/movie-fr.2014.vtt", 
-            kind: "captions",
-            label: "French"
-        }]
-    }]
+<head>
+    <meta charset="UTF-8">
+    <title>CDNBye JWPlayer Demo</title>
+    <!-- CDNBye Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/cdnbye@latest"></script>
+    <script src="https://cdn.jsdelivr.net/gh/teranode/jw-provider@0.0.9/provider.hlsjs.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/cdnbye@latest/dist/jwplayer.provider.hls.js"></script>-->
+    <!-- JW Player Builds -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="mousetrap.min.js" charset="utf-8"></script>
+	
+    <script src="https://ssl.p.jwpcdn.com/player/v/8.21.0/jwplayer.js"></script>
+<script> jwplayer.key = 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc='; </script>
+</head>
+<body>
+<header></header>
+<center>
+<div id="video"  controls>Loading Player...</div>   
+</center>
 
-});
+<script type='text/javascript'>    
+var playerInstance = jwplayer("video");
+playerInstance.setup({
+ sources: [{
+        file: "https://d1r94zrwa3gnlo.cloudfront.net/livestore103/stream/hls/290/290.m3u8",
+        image: "http://assets-jp.jwpsrv.com/thumbs/3XnJSIm4-640.jpg",
+        title: "Sintel Trailer",
+        description: "Sintel is a fantasy CGI movie from the Blender Open Movie Project."
+}],
+    autostart: true,
+    mute: true,
+    controls: true,
+    aspectratio: "16:9",
+    stretching: "exactfit",      //uniform|fill|exactfit|bestfit|none
+    primary:"flash",
+    repeat: true,
+    height: '480',
+    width: '840',
+      listbar: {
+        position: "right",
+        size: 280
+      }
+          });
+
+
+  function loadVideo(myFile,myImage) { 
+    jwplayer().load([{
+      file: myFile,
+      image: myImage
+    }]);
+    jwplayer().play();
+  };
+
+
+
+	
+var my_func = function(event) {
+        var InsertUrl = document.getElementById('video').value;
+        console.log(InsertUrl)
+        window.location.href = InsertUrl;
+	url = InsertUrl;
+        event.preventDefault();
+    };      
+
+    var form = document.getElementById("formulario");
+    form.addEventListener("submit", my_func, true);
+
+
+    
+
+ 
+    
+
+//var newURL;
+//javascript codes here
+//document.write(newURL); //will output something like this - https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_slpor.m3u8
+
 </script>
-    </body>
+
+	<li><a href="javascript:loadVideo('https://stream.live.novotempo.com/tv/smil:tvnovotempo.smil/chunklist_slpor.m3u8','image1.jpg')">Video 1</a></li>
+<li><a href="javascript:loadVideo('https://ia601505.us.archive.org/20/items/Kalimba.mp3_377/Kalimba.mp3','image2.jpg')">Video 2</a></li>
+<li><a href="javascript:loadVideo('https://d1r94zrwa3gnlo.cloudfront.net/livestore102/stream/hls/282/282.m3u8','image3.jpg')">Video 3</a></li>
+	<form id="formulario">
+        <div>
+            <input type="text" placeholder="Insert your URL"   id="video">
+            <input  type="submit" value="Start">
+        </div>
+</form>
+<div id="video"></div>
+<button id="push">Push to playlist</button>
+</body>
 </html>
